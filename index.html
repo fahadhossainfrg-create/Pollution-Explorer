@@ -382,6 +382,15 @@ body{
 .planner-item input{width:20px;height:20px;accent-color:var(--good);margin-top:2px}
 .planner-score{display:grid;place-items:center;align-content:center;border:1px solid var(--line);border-radius:18px;background:var(--panel2);padding:18px;text-align:center}
 .planner-score strong{font-size:3rem;color:var(--cyan);line-height:1}
+.cascade-controls{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}
+.cascade-control{border:1px solid var(--line);background:var(--panel2);color:var(--text);border-radius:13px;padding:.75rem 1rem;font-weight:850;cursor:pointer}
+.cascade-control.active{border-color:var(--cyan);background:rgba(34,211,238,.12);color:var(--cyan)}
+.cascade-flow{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+.cascade-step{position:relative;border:1px solid var(--line);border-radius:16px;background:var(--panel2);padding:15px;min-height:145px}
+.cascade-step strong{display:block;color:var(--cyan);margin-bottom:6px;font-size:1.02rem}
+.cascade-step .step-no{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:rgba(34,211,238,.14);color:var(--cyan);font-weight:900;margin-bottom:8px}
+.cascade-step p{margin:0;color:var(--muted)}
+.cascade-summary{margin-top:14px;border-left:4px solid var(--good);padding:14px 16px;background:rgba(110,231,183,.07);border-radius:0 14px 14px 0}
 .video-tools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
 .video-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
 .video-card{border:1px solid var(--line);border-radius:18px;padding:16px;background:var(--panel2);display:grid;gap:9px}
@@ -396,7 +405,7 @@ body{
 .system-link{border:1px solid var(--line);border-radius:15px;padding:14px;background:var(--panel2)}
 .system-link strong{display:block;margin-bottom:4px}
 @media(max-width:900px){.class-grid{grid-template-columns:1fr}.class-nav{grid-template-columns:repeat(4,1fr)}}
-@media(max-width:720px){.video-grid,.worldview-grid,.planner-grid,.systems-links{grid-template-columns:1fr}.cycle-track{grid-template-columns:1fr}.cycle-arrow{transform:rotate(90deg)}.sphere-buttons{grid-template-columns:1fr 1fr}}
+@media(max-width:720px){.video-grid,.worldview-grid,.planner-grid,.systems-links,.cascade-flow{grid-template-columns:1fr}.cycle-track{grid-template-columns:1fr}.cycle-arrow{transform:rotate(90deg)}.sphere-buttons{grid-template-columns:1fr 1fr}}
 @media(max-width:520px){.class-nav{grid-template-columns:1fr 1fr}}
 
 
@@ -1865,12 +1874,13 @@ function renderClass(){
  }
  if(classMode==="planner"){
   out=`<h3>🐺 Explore a Yellowstone trophic cascade</h3>
-  <p class="sub"><strong>A trophic cascade</strong> is a chain of indirect effects through a food web. A change to a top predator can alter herbivores, plants, habitats and other animals. Tick each step to trace what can happen when wolves are removed and later reintroduced in Yellowstone.</p>
+  <p class="sub"><strong>A trophic cascade</strong> is a chain of indirect effects through a food web. A change to a top predator can alter herbivores, plants, habitats and other animals. Choose a scenario below to follow the cause-and-effect sequence.</p>
   <div class="case-alert"><strong>Important scientific note:</strong> this is a simplified learning model, not a claim that wolves alone controlled every change. Elk numbers and behaviour, hunting outside the park, drought, climate, beavers, bears, cougars, vegetation and river processes also influenced Yellowstone. <a href="#s33">[33]</a></div>
-  <div class="planner-grid">
-   <div class="planner-items" id="classPlannerItems"></div>
-   <div class="planner-score"><strong id="classPlannerScore">0%</strong><span>cascade explored</span><p class="note" id="classPlannerMsg">Begin with wolf removal.</p><button class="btn" type="button" id="classPlannerReset">Reset cascade</button></div>
-  </div>`;
+  <div class="cascade-controls" aria-label="Choose a Yellowstone scenario">
+   <button class="cascade-control active" type="button" data-cascade="removed">Wolves removed</button>
+   <button class="cascade-control" type="button" data-cascade="returned">Wolves reintroduced</button>
+  </div>
+  <div id="cascadeStage" aria-live="polite"></div>`;
  }
  classStage.innerHTML=out;
 
@@ -1884,30 +1894,42 @@ function renderClass(){
    paintSphere();
  }
  if(classMode==="planner"){
-   const items=[
-    "WOLVES REMOVED — The top predator disappears from Yellowstone, weakening predation pressure on elk.",
-    "ELK PRESSURE INCREASES — Elk become more numerous in some periods and can spend longer browsing in valleys and along streams.",
-    "YOUNG TREES ARE BROWSED — Heavy feeding limits the growth and recruitment of willow, aspen and cottonwood in many places.",
-    "RIPARIAN HABITAT DECLINES — With less tall woody vegetation, food and shelter for beavers, songbirds and other animals can decrease.",
-    "FOOD-WEB RELATIONSHIPS SHIFT — Coyotes and other species respond to the changed predator community; effects spread beyond a simple wolf–elk link.",
-    "WOLVES REINTRODUCED (1995) — Wolves return as a top predator and begin affecting elk through predation and, in some places, behaviour.",
-    "BROWSING PRESSURE CHANGES — Elk abundance, distribution and time spent in risky locations can change, although the pattern varies across the park.",
-    "VEGETATION RECOVERS IN SOME AREAS — Willow, aspen and cottonwood grow better where browsing falls and local water and climate conditions are suitable.",
-    "HABITAT CONNECTIONS EXPAND — More woody vegetation can provide food and building material for beavers and habitat for birds and other wildlife.",
-    "BEAVERS MODIFY WATERWAYS — Beaver dams can create ponds and wetlands, slow local water flow and provide habitat for fish, amphibians and insects.",
-    "SCAVENGERS GAIN FOOD — Wolf kills provide carrion for ravens, eagles, bears and other scavengers.",
-    "THE CASCADE REMAINS COMPLEX — Wolves contributed to change, but they did not single-handedly ‘change the rivers’; multiple interacting forces shaped the outcome."
-   ];
-   const wrap=classStage.querySelector("#classPlannerItems");
-   items.forEach((t,i)=>{const lab=document.createElement("label");lab.className="planner-item";lab.innerHTML=`<input type="checkbox"><span>${t}</span>`;wrap.appendChild(lab);});
-   const scoreEl=classStage.querySelector("#classPlannerScore"),msg=classStage.querySelector("#classPlannerMsg");
-   function update(){
-    const checks=[...wrap.querySelectorAll("input")],done=checks.filter(x=>x.checked).length,pct=Math.round(done/checks.length*100);
-    scoreEl.textContent=pct+"%";
-    msg.textContent=pct===100?"Cascade complete — one predator change can create many direct and indirect effects.":pct>=75?"The reintroduction pathway is spreading through vegetation, habitat and waterways.":pct>=40?"You have reached wolf reintroduction — now trace the recovery pathway.":"Trace how wolf removal changes elk pressure and vegetation.";
+   const cascadeData={
+    removed:{
+     title:"When wolves were removed",
+     steps:[
+      ["Top predator lost","Predation pressure on elk weakened and the predator community changed."],
+      ["Elk browsing pressure rose","Elk could spend more time feeding in some valleys and streamside areas."],
+      ["Young woody plants struggled","Willow, aspen and cottonwood recruitment declined in many heavily browsed locations."],
+      ["Riparian habitat weakened","Less tall vegetation meant less food and shelter for beavers, birds and other wildlife."],
+      ["Food-web relationships shifted","Coyotes, scavengers, prey species and competitors responded to the altered predator system."],
+      ["Ecosystem effects accumulated","Changes in plants and animals affected habitat structure, although climate and other forces also mattered."]
+     ],
+     summary:"Removal of a top predator can release pressure on herbivores. The resulting effects may move downward through vegetation and outward to many connected species."
+    },
+    returned:{
+     title:"After wolves were reintroduced in 1995",
+     steps:[
+      ["Top predator returned","Wolves again preyed on elk and influenced the wider predator community."],
+      ["Elk patterns changed","Elk abundance, distribution and use of risky locations changed, with variation across the park."],
+      ["Browsing fell in some places","Reduced browsing allowed willow, aspen and cottonwood to grow better where local conditions supported recovery."],
+      ["Habitat opportunities increased","Woody vegetation supplied food and building material for beavers and habitat for birds and other animals."],
+      ["Beavers shaped local waterways","Dams created ponds and wetlands, slowed local flows and expanded habitat for fish, insects and amphibians."],
+      ["Scavengers gained carrion","Wolf kills supplied food for ravens, eagles, bears and other scavengers."],
+      ["The system stayed complex","Wolves contributed to change, but hunting, climate, drought, other predators, plants, beavers and river processes also shaped outcomes."]
+     ],
+     summary:"Reintroducing wolves restored an important ecological interaction. It influenced several pathways, but it did not single-handedly ‘change the rivers’."
+    }
+   };
+   const stage=classStage.querySelector("#cascadeStage");
+   const controls=[...classStage.querySelectorAll(".cascade-control")];
+   function paintCascade(key){
+    const c=cascadeData[key];
+    stage.innerHTML=`<h4>${c.title}</h4><div class="cascade-flow">${c.steps.map((s,i)=>`<article class="cascade-step"><span class="step-no">${i+1}</span><strong>${s[0]}</strong><p>${s[1]}</p></article>`).join("")}</div><div class="cascade-summary"><strong>What this demonstrates:</strong> ${c.summary}</div>`;
+    controls.forEach(b=>b.classList.toggle("active",b.dataset.cascade===key));
    }
-   wrap.addEventListener("change",update);
-   classStage.querySelector("#classPlannerReset").addEventListener("click",()=>{wrap.querySelectorAll("input").forEach(x=>x.checked=false);update();});
+   controls.forEach(b=>b.addEventListener("click",()=>paintCascade(b.dataset.cascade)));
+   paintCascade("removed");
  }
 }
 renderClass();
