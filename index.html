@@ -632,7 +632,7 @@ body{
  <div class="container">
   <div class="section-kicker">Year 9 Geography integration</div>
   <h2>Environmental Change & Management — class deck connections</h2>
-  <p class="sub">This module pulls the most relevant ideas from the uploaded 49-slide class presentation into the pollution project: environmental worldviews, ecological footprint, carbon cycle, Earth’s four spheres, Indigenous perspectives, ecosystem interconnections, marine/coastal change, pollution case studies and the infographic assessment criteria.</p>
+  <p class="sub">This module pulls the most relevant ideas from the uploaded 49-slide class presentation into the pollution project: environmental worldviews, ecological footprint, carbon cycle, Earth’s four spheres, Indigenous perspectives, ecosystem interconnections, marine/coastal change, pollution case studies and an interactive Yellowstone trophic cascade.</p>
   <div class="class-shell">
    <div class="class-grid">
     <div class="class-nav" id="classNav"></div>
@@ -1754,7 +1754,7 @@ const classTopics = [
   ["marine","🐠 Marine & Reef"],
   ["coasts","🌊 Coastal change"],
   ["china","🛰️ China NO₂ case"],
-  ["planner","📝 Infographic planner"]
+  ["planner","🐺 Yellowstone cascade"]
 ];
 const classNav = document.getElementById("classNav");
 const classStage = document.getElementById("classStage");
@@ -1864,11 +1864,12 @@ function renderClass(){
   <div class="verify"><strong>What this teaches:</strong> air pollution can respond quickly when emission sources change. It also shows why scientists compare the same season across multiple years — weather, sunlight and holidays can otherwise mislead the interpretation.</div>`;
  }
  if(classMode==="planner"){
-  out=`<h3>📝 Build the class pollution infographic</h3>
-  <p class="sub">This checklist mirrors the assessment-style prompt in the class deck and adds two evidence-quality steps. Tick items as your infographic/site covers them. [30]</p>
+  out=`<h3>🐺 Explore a Yellowstone trophic cascade</h3>
+  <p class="sub"><strong>A trophic cascade</strong> is a chain of indirect effects through a food web. A change to a top predator can alter herbivores, plants, habitats and other animals. Tick each step to trace what can happen when wolves are removed and later reintroduced in Yellowstone.</p>
+  <div class="case-alert"><strong>Important scientific note:</strong> this is a simplified learning model, not a claim that wolves alone controlled every change. Elk numbers and behaviour, hunting outside the park, drought, climate, beavers, bears, cougars, vegetation and river processes also influenced Yellowstone. <a href="#s33">[33]</a></div>
   <div class="planner-grid">
    <div class="planner-items" id="classPlannerItems"></div>
-   <div class="planner-score"><strong id="classPlannerScore">0%</strong><span>assessment coverage</span><p class="note" id="classPlannerMsg">Start checking completed elements.</p><button class="btn" type="button" id="classPlannerReset">Reset</button></div>
+   <div class="planner-score"><strong id="classPlannerScore">0%</strong><span>cascade explored</span><p class="note" id="classPlannerMsg">Begin with wolf removal.</p><button class="btn" type="button" id="classPlannerReset">Reset cascade</button></div>
   </div>`;
  }
  classStage.innerHTML=out;
@@ -1884,18 +1885,18 @@ function renderClass(){
  }
  if(classMode==="planner"){
    const items=[
-    "Define the chosen pollution type clearly.",
-    "Explain its major causes and sources.",
-    "Explain how the pollution spreads or moves.",
-    "Show impacts on humans.",
-    "Show impacts on animals / wildlife.",
-    "Show impacts on the wider environment.",
-    "Explain what is currently being done to combat it.",
-    "Give your own evidence-based recommendations.",
-    "Use colour, images and strong visual design.",
-    "Include at least one graph, diagram or map.",
-    "Add significant statistics with dates.",
-    "Cite reliable sources and distinguish video claims from current evidence."
+    "WOLVES REMOVED — The top predator disappears from Yellowstone, weakening predation pressure on elk.",
+    "ELK PRESSURE INCREASES — Elk become more numerous in some periods and can spend longer browsing in valleys and along streams.",
+    "YOUNG TREES ARE BROWSED — Heavy feeding limits the growth and recruitment of willow, aspen and cottonwood in many places.",
+    "RIPARIAN HABITAT DECLINES — With less tall woody vegetation, food and shelter for beavers, songbirds and other animals can decrease.",
+    "FOOD-WEB RELATIONSHIPS SHIFT — Coyotes and other species respond to the changed predator community; effects spread beyond a simple wolf–elk link.",
+    "WOLVES REINTRODUCED (1995) — Wolves return as a top predator and begin affecting elk through predation and, in some places, behaviour.",
+    "BROWSING PRESSURE CHANGES — Elk abundance, distribution and time spent in risky locations can change, although the pattern varies across the park.",
+    "VEGETATION RECOVERS IN SOME AREAS — Willow, aspen and cottonwood grow better where browsing falls and local water and climate conditions are suitable.",
+    "HABITAT CONNECTIONS EXPAND — More woody vegetation can provide food and building material for beavers and habitat for birds and other wildlife.",
+    "BEAVERS MODIFY WATERWAYS — Beaver dams can create ponds and wetlands, slow local water flow and provide habitat for fish, amphibians and insects.",
+    "SCAVENGERS GAIN FOOD — Wolf kills provide carrion for ravens, eagles, bears and other scavengers.",
+    "THE CASCADE REMAINS COMPLEX — Wolves contributed to change, but they did not single-handedly ‘change the rivers’; multiple interacting forces shaped the outcome."
    ];
    const wrap=classStage.querySelector("#classPlannerItems");
    items.forEach((t,i)=>{const lab=document.createElement("label");lab.className="planner-item";lab.innerHTML=`<input type="checkbox"><span>${t}</span>`;wrap.appendChild(lab);});
@@ -1903,7 +1904,7 @@ function renderClass(){
    function update(){
     const checks=[...wrap.querySelectorAll("input")],done=checks.filter(x=>x.checked).length,pct=Math.round(done/checks.length*100);
     scoreEl.textContent=pct+"%";
-    msg.textContent=pct===100?"Excellent — every required element is covered.":pct>=75?"Strong — finish the remaining evidence/design items.":pct>=40?"Good progress — keep building the impacts and solutions.":"Start with definition, causes and impacts.";
+    msg.textContent=pct===100?"Cascade complete — one predator change can create many direct and indirect effects.":pct>=75?"The reintroduction pathway is spreading through vegetation, habitat and waterways.":pct>=40?"You have reached wolf reintroduction — now trace the recovery pathway.":"Trace how wolf removal changes elk pressure and vegetation.";
    }
    wrap.addEventListener("change",update);
    classStage.querySelector("#classPlannerReset").addEventListener("click",()=>{wrap.querySelectorAll("input").forEach(x=>x.checked=false);update();});
