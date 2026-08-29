@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Augmented Reality Sandbox — Making Topographic Maps Visible</title>
+<style>
+:root{
+  --bg:#07111e;--panel:#0e1c2c;--panel2:#13263a;--text:#f6f8fb;--muted:#b8c5d4;
+  --line:rgba(255,255,255,.12);--accent:#22d3ee;--accent2:#a78bfa;--good:#6ee7b7;
+  --warn:#fbbf24;--pink:#f472b6;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  color:var(--text);line-height:1.75;
+  background:
+    radial-gradient(circle at 8% 0%,rgba(34,211,238,.12),transparent 27%),
+    radial-gradient(circle at 92% 5%,rgba(244,114,182,.10),transparent 26%),
+    var(--bg);
+}
+a{color:var(--accent)}
+.wrap{width:min(940px,92%);margin:auto}
+header{padding:54px 0 34px}
+.kicker{color:var(--good);text-transform:uppercase;letter-spacing:.08em;font-weight:850;font-size:.78rem}
+h1{font-size:clamp(2.3rem,6vw,4.8rem);line-height:1.02;letter-spacing:-.045em;margin:.55rem 0 1rem}
+.lead{font-size:1.08rem;color:var(--muted);max-width:820px}
+.meta{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 0}
+.meta span{border:1px solid var(--line);border-radius:999px;padding:.28rem .58rem;font-size:.82rem;color:var(--muted)}
+nav{display:flex;gap:9px;flex-wrap:wrap;margin-top:20px}
+.btn{display:inline-block;text-decoration:none;border:1px solid var(--line);border-radius:12px;padding:.68rem .9rem;background:var(--panel);font-weight:800}
+.btn.primary{background:var(--accent);color:#07111e;border-color:transparent}
+main{padding-bottom:60px}
+.article-card{border:1px solid var(--line);border-radius:22px;background:var(--panel);padding:clamp(18px,4vw,34px)}
+.article-card h2{font-size:1.7rem;line-height:1.2;margin:2rem 0 .65rem;letter-spacing:-.02em}
+.article-card h2:first-child{margin-top:0}
+.article-card h3{font-size:1.15rem;margin:1.35rem 0 .35rem}
+.article-card p{margin:.65rem 0;color:#e9eef5}
+.article-card ul{margin:.6rem 0;padding-left:1.3rem}
+.article-card li{margin:.45rem 0}
+.callout{border-left:4px solid var(--accent);background:rgba(34,211,238,.06);padding:14px 16px;border-radius:0 14px 14px 0;margin:18px 0}
+.warning{border-left-color:var(--warn);background:rgba(251,191,36,.07)}
+.good{border-left-color:var(--good);background:rgba(110,231,183,.07)}
+.quote-note{color:var(--muted);font-size:.92rem}
+.study{display:grid;gap:9px}
+.q{border:1px solid var(--line);background:var(--panel2);border-radius:13px;padding:12px 14px}
+.sources{border-top:1px solid var(--line);margin-top:28px;padding-top:18px;color:var(--muted)}
+footer{padding:30px 0 45px;color:var(--muted);text-align:center}
+@media(max-width:600px){header{padding-top:38px}.article-card{padding:18px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="kicker">Detailed video article</div>
+    <h1>Augmented Reality Sandbox — Making Topographic Maps Visible</h1>
+    <p class="lead">The augmented-reality sandbox is a visual tool that turns a pile of real sand into a live topographic map. It is useful because it allows students to see how a three-dimensional landscape becomes two-dimensional elevation colours and contour lines.</p>
+    <div class="meta"><span>Slide 31</span><span>Visual study article</span></div>
+    <nav>
+      <a class="btn primary" href="https://www.youtube.com/watch?v=bA4uvkAStPc" target="_blank" rel="noopener">Open video ↗</a>
+      <a class="btn" href="./index.html">All video articles</a>
+      <a class="btn" href="../index.html">Pollution Explorer</a>
+    </nav>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+    <article class="article-card">
+      <div class="callout good"><strong>Article format:</strong> This is a detailed educational paraphrase based on the available transcript/captions or verified video-study material. It does not reproduce a full copyrighted transcript word-for-word.</div>
+      <h2>How the system works</h2>
+<p>The sandbox combines physical sand, a depth-sensing camera, computer software and a projector. The camera measures the height of the sand surface. Software converts those height measurements into elevation information.</p>
+<p>The projector then places colours and contour lines directly on top of the sand.</p>
+<h2>Changing the land changes the map</h2>
+<p>When a user builds a hill, digs a valley or creates a basin, the system updates instantly. The physical landform and the digital topographic representation remain connected.</p>
+<p>This makes contour lines easier to understand because the student can create a slope and immediately see how the line spacing changes.</p>
+<h2>Contour spacing and slope</h2>
+<p>Contour lines join places of equal elevation. If elevation changes quickly over a short horizontal distance, the contour lines are close together and the slope is steep.</p>
+<p>If elevation changes gradually, the contours are farther apart. The sandbox therefore creates a direct visual relationship between slope shape and map pattern.</p>
+<h2>Catchments and hydrology</h2>
+<p>Many AR sandbox systems can simulate water. Digital rainfall can flow downhill, collect in low areas and follow drainage paths.</p>
+<p>That makes the tool useful for understanding catchments, watersheds, flood pathways and how topography influences the movement of water — all relevant to pollution runoff and coastal management.</p>
+      <h2>Evidence check / updated context</h2>
+      <div class="callout warning">The class resource is primarily a visual demonstration. This article explains the demonstrated concepts and does not claim to reproduce a full narration transcript.</div>
+      <div class="sources">
+        <h3>Verification links</h3>
+        <p>No additional external verification link is required for this article beyond the video/class source.</p>
+      </div>
+      <h2>Study and assessment questions</h2>
+      <div class="study"><div class="q"><strong>1.</strong> Why do steep slopes have closely spaced contour lines?</div><div class="q"><strong>2.</strong> How does the system connect 3-D terrain to a 2-D map?</div><div class="q"><strong>3.</strong> How could simulated rain show a catchment?</div><div class="q"><strong>4.</strong> How could the sandbox be used to model pollution runoff?</div></div>
+    </article>
+  </div>
+</main>
+<footer><div class="wrap">Pollution Explorer • Year 9 Geography video article series</div></footer>
+</body>
+</html>
