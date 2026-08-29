@@ -1874,7 +1874,8 @@ function renderClass(){
  }
  if(classMode==="planner"){
   out=`<h3>🐺 Explore a Yellowstone trophic cascade</h3>
-  <p class="sub"><strong>A trophic cascade</strong> is a chain of indirect effects through a food web. A change to a top predator can alter herbivores, plants, habitats and other animals. Choose a scenario below to follow the cause-and-effect sequence.</p>
+  <p class="sub"><strong>A trophic cascade</strong> is an ecological process that begins near the top of a food chain and creates effects through lower trophic levels. The scenarios below follow the sequence presented in the class video <a href="https://www.youtube.com/watch?v=ysa5OBhXz-Q" target="_blank" rel="noopener"><em>How Wolves Change Rivers</em> ↗</a>.</p>
+  <div class="verify"><strong>Video terminology:</strong> the narration repeatedly says “deer”; in Yellowstone, the large browsing animal at the centre of this example is primarily elk. The cards use <strong>elk</strong> for accuracy while preserving the video’s explanation.</div>
   <div class="case-alert"><strong>Important scientific note:</strong> this is a simplified learning model, not a claim that wolves alone controlled every change. Elk numbers and behaviour, hunting outside the park, drought, climate, beavers, bears, cougars, vegetation and river processes also influenced Yellowstone. <a href="#s33">[33]</a></div>
   <div class="cascade-controls" aria-label="Choose a Yellowstone scenario">
    <button class="cascade-control active" type="button" data-cascade="removed">Wolves removed</button>
@@ -1896,31 +1897,32 @@ function renderClass(){
  if(classMode==="planner"){
    const cascadeData={
     removed:{
-     title:"When wolves were removed",
+     title:"When wolves were absent — the video’s starting point",
      steps:[
-      ["Top predator lost","Predation pressure on elk weakened and the predator community changed."],
-      ["Elk browsing pressure rose","Elk could spend more time feeding in some valleys and streamside areas."],
-      ["Young woody plants struggled","Willow, aspen and cottonwood recruitment declined in many heavily browsed locations."],
-      ["Riparian habitat weakened","Less tall vegetation meant less food and shelter for beavers, birds and other wildlife."],
-      ["Food-web relationships shifted","Coyotes, scavengers, prey species and competitors responded to the altered predator system."],
-      ["Ecosystem effects accumulated","Changes in plants and animals affected habitat structure, although climate and other forces also mattered."]
+      ["Wolves absent for about 70 years","The video explains that wolves had disappeared from Yellowstone long before their 1995 reintroduction."],
+      ["Elk numbers built up","With no wolves hunting them, elk increased despite attempts by people to control their numbers."],
+      ["Vegetation was heavily grazed","The video says browsing reduced much of the park’s vegetation, especially in vulnerable valleys and gorges."],
+      ["Trees and shrubs struggled","Aspen, willow and cottonwood could not regenerate well in many heavily browsed areas."],
+      ["Connected habitats were reduced","Less woody vegetation meant fewer resources and habitat opportunities for birds, beavers and other species."]
      ],
-     summary:"Removal of a top predator can release pressure on herbivores. The resulting effects may move downward through vegetation and outward to many connected species."
+     summary:"The video presents wolf absence as the beginning of the cascade: fewer predators allowed elk pressure to rise, which reduced vegetation and affected other parts of the ecosystem."
     },
     returned:{
-     title:"After wolves were reintroduced in 1995",
+     title:"After wolves returned in 1995 — the video’s sequence",
      steps:[
-      ["Top predator returned","Wolves again preyed on elk and influenced the wider predator community."],
-      ["Elk patterns changed","Elk abundance, distribution and use of risky locations changed, with variation across the park."],
-      ["Browsing fell in some places","Reduced browsing allowed willow, aspen and cottonwood to grow better where local conditions supported recovery."],
-      ["Habitat opportunities increased","Woody vegetation supplied food and building material for beavers and habitat for birds and other animals."],
-      ["Stream banks became better protected","In some locations, recovering willow and other streamside plants strengthened banks with their roots, trapped sediment and reduced local erosion."],
-      ["Rivers gained shade and structure","More riparian vegetation shaded sections of water, added woody material and created more complex habitat along river edges."],
-      ["Beavers shaped local waterways","More willow supported beavers. Their dams created ponds and wetlands, slowed local flows, stored water and expanded habitat for fish, insects and amphibians."],
-      ["Scavengers gained carrion","Wolf kills supplied food for ravens, eagles, bears and other scavengers."],
-      ["The system stayed complex","Wolves contributed to change, but hunting, climate, drought, other predators, plants, beavers and river processes also shaped outcomes."]
+      ["Wolves returned in 1995","The video describes their reintroduction as a classic trophic cascade."],
+      ["Elk behaviour changed","Beyond killing some elk, wolves caused elk to avoid places where they could be trapped easily, especially valleys and gorges."],
+      ["Vegetation regenerated","The video reports that bare valley sides developed aspen, willow and cottonwood and that tree height increased fivefold in some areas within six years."],
+      ["Birds and beavers increased","More trees supported songbirds and migratory birds. Beavers increased because trees provided food and construction material."],
+      ["Beaver dams created habitat","Dams provided habitat for otters, muskrats, ducks, fish, reptiles and amphibians."],
+      ["Coyotes and small mammals changed","The video says wolves reduced coyotes; rabbits and mice then increased, supporting more hawks, weasels, foxes and badgers."],
+      ["Scavengers and bears benefited","Ravens, bald eagles and bears fed on carrion from wolf kills. Bears also benefited from berries on regenerating shrubs."],
+      ["Riverbanks became more stable","Regenerating forests strengthened banks, so they collapsed less often. Vegetation on valley sides also reduced soil erosion."],
+      ["River shapes changed","According to the video, rivers meandered less, channels narrowed, and more pools and riffle sections formed—creating varied wildlife habitat."],
+      ["Physical geography was affected","The video concludes that a small number of wolves influenced not only living communities but also Yellowstone’s landforms and waterways."],
+      ["Evidence must still be evaluated","The video is a powerful simplified explanation. Later research describes a more complex system shaped by several interacting causes."]
      ],
-     summary:"Reintroducing wolves restored an important ecological interaction. In some places, changes in elk browsing helped streamside plants recover; their roots stabilised banks, while beaver dams slowed water and created wetlands. These processes could reduce local erosion and improve river habitat. Wolves helped start parts of this cascade, but they did not single-handedly ‘change the rivers’."
+     summary:"The video’s river pathway is: wolves returned → elk avoided some vulnerable places → streamside vegetation regenerated → roots stabilised banks and reduced erosion → channels became narrower and more fixed, with more pools and riffles. The video calls this a change in the rivers’ behaviour; the evidence note reminds students that the real ecosystem response was more complex."
     }
    };
    const stage=classStage.querySelector("#cascadeStage");
